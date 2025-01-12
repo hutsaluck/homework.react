@@ -14,10 +14,10 @@ export const Todos = () => {
     }, []);
 
     return (
-        <>
+        <div className="grid grid-cols-5 gap-5 justify-center items-start mx-5">
             {
                 todos.map(todo => <Todo key={todo.id} item={todo}/>)
             }
-        </>
+        </div>
     );
 };
