@@ -1,50 +1,100 @@
-# React + TypeScript + Vite
+# Simpsons Characters App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates the implementation of a simple React application to render a list of Simpsons characters. The app showcases component-based design and basic styling. Below are the details of the task and its implementation.
 
-Currently, two official plugins are available:
+## Task Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Requirements
+1. Extract the `simpsons` array from `data.tsx`.
+2. Create a root component named `App`.
+3. Build the following components:
 
-## Expanding the ESLint configuration
+#### `CharacterComponent`
+- Displays all information about a single character from the `simpsons` array.
+- The character's description should be passed via `children`.
+- Styling should be minimal but functional (at least one working style must be applied).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### `FamilyComponent`
+- Iterates over the `simpsons` array and renders a list of `CharacterComponent`.
 
-- Configure the top-level `parserOptions` property like this:
+## Implementation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Components Structure
+
+#### 1. `App`
+The root component of the application. It imports the `FamilyComponent` and renders it.
+
+#### 2. `FamilyComponent`
+- Accepts the `simpsons` array as props or imports it directly.
+- Iterates over the array using `.map()`.
+- For each character, renders a `CharacterComponent`.
+
+#### 3. `CharacterComponent`
+- Displays the details of a single character.
+- Accepts props like `name`, `surname`, `age`, and `info`.
+- The `info` field is passed as `children`.
+
+### Styling
+- A basic CSS file is included to style the components minimally.
+- Example: Each character card has a border, padding, and some margin.
+
+### File Structure
+```
+project-folder/
+├── src/
+│   ├── components/
+│   │   ├── family-component/
+│   │   │   ├── FamilyComponent.js
+│   │   ├── character-component/
+│   │   ├── CharacterComponent.js
+│   ├── data/
+│   │   ├── data.ts
+├── ├── App.tsx
+│   ├── main.tsx
+├── package.json
+├── README.md
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Example Code
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
+#### `data.ts`
+```javascript
+export const simpsons = [
+  {
+    id: 1,
+    name: "Homer",
+    surname: "Simpson",
+    age: 39,
+    info: "Homer is the father of the Simpson family. He works at a nuclear power plant.",
   },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
+  {
+    id: 2,
+    name: "Marge",
+    surname: "Simpson",
+    age: 36,
+    info: "Marge is the mother of the Simpson family and is known for her blue hair.",
   },
-})
+  // Add more characters as needed
+];
 ```
+
+### Running the Application
+
+1. Clone the repository.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+4. Open the app in your browser at `http://localhost:3000`.
+
+## Future Improvements
+- Add routing for detailed character view.
+- Improve styling and responsiveness.
+- Fetch character data dynamically from an API.
+
+## License
+This project is licensed under the MIT License.
