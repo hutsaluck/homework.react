@@ -11,7 +11,7 @@
 
 ## Завдання
 
-1. Ознайомитись з даними, отриманими за посиланням: [JSONPlaceholder Todos API](https://jsonplaceholder.typicode.com/todos).
+1. Ознайомитись з даними, отриманими за посиланням: [DummyJSON Todos API](https://dummyjson.com).
 2. Створити компонент `TodoComponent`, який буде відображати окрему задачу (id, title, completed).
 3. Створити компонент `TodoComponents`, в якому буде ітеруватися масив завдань, отриманих з API.
 4. Всі компоненти повинні бути вкладені в компонент `App`.
