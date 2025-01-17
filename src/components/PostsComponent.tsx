@@ -12,7 +12,7 @@ export const PostsComponent = () => {
         .then(({posts}) => setPosts(posts))
     })
     return (
-        <div>
+        <div className="grid grid-cols-5 gap-5 justify-center items-start mx-5">
             {
                 posts.map((post: IPost) => <PostComponent key={post.id} post={post}/>)
             }

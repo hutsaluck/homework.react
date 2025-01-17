@@ -12,7 +12,7 @@ export const UsersComponent = () => {
     }, []);
 
     return (
-        <div>
+        <div className="grid grid-cols-5 gap-5 justify-center items-start mx-5">
             {users.map((user: IUser) => <UserComponent key={user.id} user={user}/>)}
         </div>
     );
