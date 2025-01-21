@@ -1,50 +1,123 @@
-# React + TypeScript + Vite
+# Task 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Опис завдання
 
-Currently, two official plugins are available:
+1. **Головна сторінка**:
+    - Вивести список усіх користувачів.
+    - При кліку на певного користувача поруч зі списком користувачів відображати корзини товарів цього користувача.
+    - Батьківський компонент залишається незмінним; відображення корзин товарів відбувається динамічно без заміни основного компонента.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Структура проекту
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+project/
+├── components/
+│   ├── UsersList.jsx         # Компонент для відображення списку користувачів
+│   ├── UserCarts.jsx         # Компонент для відображення корзин товарів обраного користувача
+│   └── Layout.jsx            # Основний макет сторінки
+├── pages/
+│   └── index.jsx             # Головна сторінка проекту
+├── styles/
+│   └── globals.css           # Загальні стилі проекту
+├── data/
+│   └── users.json            # Тестові дані користувачів та їх корзин
+├── README.md                 # Опис проекту
+└── package.json              # Налаштування проекту
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Тестові дані
+Файл `data/users.json` може містити структуру:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
+```json
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "carts": [
+      { "id": 101, "item": "Laptop", "price": 1200 },
+      { "id": 102, "item": "Phone", "price": 800 }
+    ]
   },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "carts": [
+      { "id": 201, "item": "Tablet", "price": 600 },
+      { "id": 202, "item": "Headphones", "price": 200 }
+    ]
+  }
+]
 ```
+
+---
+
+## Розгортання проекту
+
+1. **Клонування репозиторію**:
+   ```bash
+   git clone <repository-url>
+   cd project
+   ```
+
+2. **Встановлення залежностей**:
+   ```bash
+   npm install
+   ```
+
+3. **Запуск проекту**:
+   ```bash
+   npm run dev
+   ```
+   Відкрийте [http://localhost:3000](http://localhost:3000) у браузері.
+
+---
+
+## Основна логіка
+
+1. **Компонент `UsersList`**:
+    - Відображає список користувачів.
+    - При кліку на користувача викликає функцію для передачі даних обраного користувача у стан батьківського компонента.
+
+2. **Компонент `UserCarts`**:
+    - Приймає дані про корзини товарів обраного користувача через пропси.
+    - Виводить список товарів із зазначенням їх назв та цін.
+
+3. **Стан у батьківському компоненті**:
+    - Зберігає інформацію про поточного обраного користувача.
+    - Передає ці дані дочірнім компонентам.
+
+---
+
+## Приклад використання
+
+### Головна сторінка
+
+- **Список користувачів**:
+  ```
+  1. John Doe
+  2. Jane Smith
+  ```
+
+- **Корзини товарів (після кліку на John Doe)**:
+  ```
+  Корзини John Doe:
+  - Laptop: $1200
+  - Phone: $800
+  ```
+
+---
+
+## Можливі покращення
+
+- Додати функціонал для виділення активного користувача у списку.
+- Зробити компонент `UserCarts` незалежним, щоб його можна було повторно використовувати в інших частинах проекту.
+- Додати стилізацію для покращення UX.
+
+---
+
+## Ліцензія
+Цей проект створено для навчальних цілей. Використовуйте його вільно!
