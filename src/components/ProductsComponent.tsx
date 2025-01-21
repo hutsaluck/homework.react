@@ -7,7 +7,7 @@ interface ProductsComponentProps {
 
 export const ProductsComponent = ({products}: ProductsComponentProps) => {
     return (
-        <div className="grid grid-cols-1 gap-5 justify-center items-start mx-5">
+        <div className="grid grid-cols-5 gap-5 justify-center items-start mx-5">
             {products.map((product: IProduct) => <ProductComponent key={product.id} product={product}/>)}
         </div>
     );

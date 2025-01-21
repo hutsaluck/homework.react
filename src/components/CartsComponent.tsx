@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {ICart} from "../models/ICart.ts";
 import {ICartResponseModel} from "../models/ICartResponseModel.ts";
 import {cartService} from "../services/api.service.ts";
+import {CartEmptyComponent} from "./CartEmptyComponent.tsx";
 
 export const CartsComponent = () => {
     const {id} = useParams()
@@ -16,7 +17,8 @@ export const CartsComponent = () => {
 
     return (
         <div>
-            {carts.map((cart: ICart) => (<CartComponent cart={cart} key={cart.id}/>))}
+            {!!carts.length && carts.map((cart: ICart) => (<CartComponent cart={cart} key={cart.id}/>))}
+            {!carts.length && <CartEmptyComponent />}
         </div>
     );
 };
