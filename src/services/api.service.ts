@@ -1,7 +1,7 @@
 import {IUserResponseModel} from "../models/IUserResponseModel.ts";
 import {ICartResponseModel} from "../models/ICartResponseModel.ts";
 
-const baseUrl = `https://dummyjson.com`
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const userService = {
     getAllUsers: async (): Promise<IUserResponseModel> => {
