@@ -8,9 +8,10 @@ export const PostsComponent = () => {
     const [posts, setPosts] = useState<IPost[]>([])
 
     useEffect(() => {
-        getAll<IBaseResponseModel & {posts: IPost[]}>('/posts')
-        .then(({posts}) => setPosts(posts))
-    })
+        getAll<IBaseResponseModel & { posts: IPost[] }>('/posts')
+            .then(({posts}) => setPosts(posts))
+    }, [])
+
     return (
         <div className="grid grid-cols-5 gap-5 justify-center items-start mx-5">
             {
