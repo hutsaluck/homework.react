@@ -1,7 +1,8 @@
 import {createBrowserRouter} from "react-router";
 import {MainLayout} from "../layouts/MainLayout.tsx";
 import {UsersPage} from "../pages/UsersPage.tsx";
-import {CartsPage} from "../pages/CartsPage.tsx";
+import {PaginationLayout} from "../layouts/PaginationLayout.tsx";
+import {HomePage} from "../pages/HomePage.tsx";
 
 export const routes = createBrowserRouter([
     {
@@ -9,12 +10,18 @@ export const routes = createBrowserRouter([
         element: <MainLayout/>,
         children: [
             {
-                path: 'users',
-                element: <UsersPage/>
+                path: '', // Головна сторінка
+                element: <HomePage />,
             },
             {
-                path: 'users/:id/carts',
-                element: <CartsPage/>
+                path: '',
+                element: <PaginationLayout/>,
+                children: [
+                    {
+                        path: 'users',
+                        element: <UsersPage/>
+                    },
+                ]
             }
         ]
     }

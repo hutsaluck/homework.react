@@ -1,70 +1,126 @@
-# Завдання: Task3
+# Routing Application
 
-## Опис завдання
+This project demonstrates routing in a React application with pagination. It fetches data from the `dummyjson.com` API and displays users on the `UsersPage`. The page includes pagination buttons (`Next` and `Previous`) for navigating through the user list.
 
-Реалізувати функціональність, яка включає:
-1. Виведення списку всіх користувачів на головній сторінці.
-2. При кліку на певного користувача:
-   - Замінити батьківський компонент списком із корзинами товарів цього користувача.
+## Features
 
-## Функціональні вимоги
-- **Головна сторінка**:
-   - Відобразити список всіх користувачів.
-   - Кожен користувач повинен бути клікабельним.
-- **Деталі користувача**:
-   - Після кліку на користувача, батьківський компонент (список користувачів) має бути замінений компонентом, що відображає список його корзин товарів.
+- **UsersPage**: Displays a list of users fetched from the API.
+- **Pagination**: Buttons to navigate between pages of users.
 
-## Технічні вимоги
-- **Фреймворк**: React.js (або інший обраний вами).
-- **Стан**: Використовувати локальний стан (useState) або глобальний стан (Redux).
-- **Роутинг**: React Router (за необхідності).
-- **Стилі**: CSS Modules, Styled Components або інший підхід.
+## Getting Started
 
-## Структура проекту
-```plaintext
-src/
-├── components/
-│   ├── UserList.js       // Компонент для відображення списку користувачів
-│   ├── UserCarts.js      // Компонент для відображення корзин товарів користувача
-│   └── UserItem.js       // Компонент для відображення окремого користувача
-├── App.js                // Головний компонент програми
-├── index.js              // Точка входу в додаток
-└── styles/               // Директорія для стилів
-```
+Follow the instructions below to set up and run the project.
 
-## Реалізація
+### Prerequisites
 
-### Компонент `UserList`
-- Відображає список всіх користувачів.
-- Передає ідентифікатор користувача в функцію для завантаження деталей.
+Make sure you have the following installed on your system:
 
-### Компонент `UserCarts`
-- Отримує дані про корзини користувача та відображає їх.
-- Заміняє `UserList` після кліку на користувача.
+- [Node.js](https://nodejs.org/) (v16 or later)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-### App.js
-- Координує відображення компонентів `UserList` і `UserCarts` залежно від стану.
+### Installation
 
-## Інструкція по запуску
+1. Clone the repository:
 
-1. **Встановити залежності:**
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
+   ```
+
+2. Install dependencies:
+
    ```bash
    npm install
+   # or
+   yarn install
    ```
-2. **Запустити проект:**
+
+### Running the Application
+
+1. Start the development server:
+
    ```bash
    npm start
-   ```
-3. **Відкрити в браузері:**
-   ```
-   http://localhost:3000
+   # or
+   yarn start
    ```
 
-## Можливі покращення
-- Додати сповіщення про завантаження (loading).
-- Обробка помилок при завантаженні даних.
-- Мобільна адаптація стилів.
+2. Open your browser and navigate to `http://localhost:3000`.
 
----
+## Project Structure
 
-Реалізуйте проект відповідно до наведених вимог та структури. Успіхів!
+```
+src
+├── components
+│   ├── Pagination.jsx       // Handles pagination logic and UI
+│   └── UsersPage.jsx        // Displays users fetched from the API
+├── api
+│   └── usersApi.js          // Contains API calls to dummyjson.com
+├── App.js                   // Main application component
+├── index.js                 // Entry point of the application
+└── styles
+    └── styles.css           // CSS styles
+```
+
+## API Integration
+
+The application uses the `dummyjson.com` API to fetch user data. Below is an example API endpoint used in the project:
+
+- **Get Users**: `https://dummyjson.com/users`
+
+### Example Response
+
+```json
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "age": 30
+    },
+    {
+      "id": 2,
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "age": 28
+    }
+  ],
+  "total": 100,
+  "skip": 0,
+  "limit": 10
+}
+```
+
+## Pagination Logic
+
+- The pagination buttons (`Next` and `Previous`) use the `skip` and `limit` query parameters to fetch the next or previous set of users.
+- The `UsersPage` component manages the state for the current page and handles API calls.
+
+### Example Pagination Query
+
+- Fetch users on page 1:
+
+  ```
+  https://dummyjson.com/users?skip=0&limit=10
+  ```
+
+- Fetch users on page 2:
+
+  ```
+  https://dummyjson.com/users?skip=10&limit=10
+  ```
+
+## Development Notes
+
+- Ensure that you handle edge cases such as when there are no more pages to navigate.
+- Add error handling for API calls.
+
+## Future Enhancements
+
+- Add loading spinners for better user experience during API calls.
+- Implement detailed user information on clicking a user.
+
+## License
+
+This project is licensed under the MIT License.
