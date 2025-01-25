@@ -1,16 +1,25 @@
-import {IUserResponseModel} from "../models/IUserResponseModel.ts";
+import axios from "axios";
+import {ICar} from "../models/ICar.ts";
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
 
-export const userService = {
-    getAllUsers: async (): Promise<IUserResponseModel> => {
-        return await fetch(`${baseUrl}/users`)
-            .then(res => res.json())
-    },
-    getAllUsersWithPagination: async (page: number = 1): Promise<IUserResponseModel> => {
-        const limit: number = 30
-        const skip: number = limit * page - limit
-        return await fetch(`${baseUrl}/users?skip=${skip}`)
-            .then(res => res.json())
-    }
+const axiosInstance = axios.create({
+    baseURL: import.meta.env.VITE_BASE_URL,
+    headers: {'Content-Type': 'application/json'}
+})
+
+export const getCars = async (): Promise<ICar[]> => {
+    const axiosResponse = await axiosInstance.get<ICar[]>(`/cars`)
+    return axiosResponse.data
 }
+
+export const getCarsWithPagination = async (page: number): Promise<ICar[]> => {
+    const limit = 30
+    const skip: number = limit * page - limit
+    const axiosResponse = await axiosInstance.get<ICar[]>(`/cars`)
+    return  axiosResponse.data.reverse().slice(skip, skip + limit)
+}
+
+export const addCar = async (car: ICar): Promise<void> => {
+    await axiosInstance.post<ICar>(`/cars`, car)
+}
+

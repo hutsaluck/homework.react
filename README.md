@@ -1,126 +1,94 @@
-# Routing Application
+# Cars API Project
 
-This project demonstrates routing in a React application with pagination. It fetches data from the `dummyjson.com` API and displays users on the `UsersPage`. The page includes pagination buttons (`Next` and `Previous`) for navigating through the user list.
+## Завдання
 
-## Features
+Проект складається з двох частин:
 
-- **UsersPage**: Displays a list of users fetched from the API.
-- **Pagination**: Buttons to navigate between pages of users.
+### Частина 1: Виведення всіх автівок
+1. Ознайомитись із документацією API:
+    - Основна URL: [http://owu.linkpc.net/carsAPI/v1/doc](http://owu.linkpc.net/carsAPI/v1/doc)
+    - Запасна URL: [http://185.69.152.209/carsAPI/v1/doc](http://185.69.152.209/carsAPI/v1/doc)
+2. Створити сторінку для виведення всіх автівок із мінімальною інформацією (наприклад, модель, марка, рік).
 
-## Getting Started
+### Частина 2: Створення нової автівки
+1. Створити сторінку з формою для створення нового об'єкта `car`.
+2. Реалізувати сервіси для роботи з API (з використанням `axios`).
+3. Додати валідацію відповідно до вимог API:
+    - Заборонити збереження автівки, якщо вона не відповідає умовам API.
 
-Follow the instructions below to set up and run the project.
+## Технічні вимоги
 
-### Prerequisites
+### Компонентна структура
+- Використовувати компоненти для логічного поділу функціоналу.
+- Уникати надмірного поділу (наприклад, не обгортати окремий інпут у компонент).
 
-Make sure you have the following installed on your system:
+### Інструменти
+- `React` для створення інтерфейсу.
+- `axios` для роботи з HTTP-запитами.
 
-- [Node.js](https://nodejs.org/) (v16 or later)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+## Інструкція з розгортання
 
-### Installation
-
-1. Clone the repository:
-
+1. Клонувати репозиторій:
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone <URL репозиторію>
    ```
 
-2. Install dependencies:
-
+2. Встановити залежності:
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
-### Running the Application
-
-1. Start the development server:
-
+3. Запустити локальний сервер для розробки:
    ```bash
    npm start
-   # or
-   yarn start
    ```
 
-2. Open your browser and navigate to `http://localhost:3000`.
+## Деталі реалізації
 
-## Project Structure
+### API сервіси
+- **Сервіс для отримання списку автівок:**
+  Отримання даних із кінцевої точки `/cars`. Використовується для відображення списку на першій сторінці.
+- **Сервіс для створення нової автівки:**
+  Відправлення POST-запиту на кінцеву точку `/cars` з відповідними полями у форматі JSON.
 
+### Валідація
+- Поля форми повинні відповідати вимогам, зазначеним у документації API.
+- У разі помилок API виводити відповідні повідомлення для користувача.
+
+## Структура проекту
 ```
-src
-├── components
-│   ├── Pagination.jsx       // Handles pagination logic and UI
-│   └── UsersPage.jsx        // Displays users fetched from the API
-├── api
-│   └── usersApi.js          // Contains API calls to dummyjson.com
-├── App.js                   // Main application component
-├── index.js                 // Entry point of the application
-└── styles
-    └── styles.css           // CSS styles
-```
-
-## API Integration
-
-The application uses the `dummyjson.com` API to fetch user data. Below is an example API endpoint used in the project:
-
-- **Get Users**: `https://dummyjson.com/users`
-
-### Example Response
-
-```json
-{
-  "users": [
-    {
-      "id": 1,
-      "firstName": "John",
-      "lastName": "Doe",
-      "age": 30
-    },
-    {
-      "id": 2,
-      "firstName": "Jane",
-      "lastName": "Doe",
-      "age": 28
-    }
-  ],
-  "total": 100,
-  "skip": 0,
-  "limit": 10
-}
+src/
+├── components/
+│   ├── CarList.jsx         # Компонент для відображення списку автівок
+│   ├── CarForm.jsx         # Компонент форми для створення нової автівки
+│   ├── CarItem.jsx         # Компонент для відображення однієї автівки
+├── services/
+│   ├── apiService.js       # Файл із функціями для роботи з API
+├── App.jsx                 # Головний компонент
+├── index.js                # Точка входу
 ```
 
-## Pagination Logic
+## Приклади використання API сервісів
 
-- The pagination buttons (`Next` and `Previous`) use the `skip` and `limit` query parameters to fetch the next or previous set of users.
-- The `UsersPage` component manages the state for the current page and handles API calls.
+### Отримання списку автівок
+```javascript
+import axios from 'axios';
 
-### Example Pagination Query
+const BASE_URL = 'http://owu.linkpc.net/carsAPI/v1';
 
-- Fetch users on page 1:
+export const getCars = async () => {
+    const response = await axios.get(`${BASE_URL}/cars`);
+    return response.data;
+};
+```
 
-  ```
-  https://dummyjson.com/users?skip=0&limit=10
-  ```
+### Додавання нової автівки
+```javascript
+export const addCar = async (carData) => {
+    const response = await axios.post(`${BASE_URL}/cars`, carData);
+    return response.data;
+};
+```
 
-- Fetch users on page 2:
-
-  ```
-  https://dummyjson.com/users?skip=10&limit=10
-  ```
-
-## Development Notes
-
-- Ensure that you handle edge cases such as when there are no more pages to navigate.
-- Add error handling for API calls.
-
-## Future Enhancements
-
-- Add loading spinners for better user experience during API calls.
-- Implement detailed user information on clicking a user.
-
-## License
-
-This project is licensed under the MIT License.
+## Ліцензія
+Цей проект є навчальним і не має ліцензії. Використовуйте на власний розсуд.
