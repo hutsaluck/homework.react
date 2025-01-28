@@ -1,20 +1,19 @@
-import './App.css'
-import {A} from "./components/A.tsx";
-import {B} from "./components/B.tsx";
 import {ThemeContext} from "./context/ContextProvider.tsx";
 import {useState} from "react";
+import {HomeComponent} from "./components/HomeComponent.tsx";
+import {MenuComponent} from "./components/MenuComponent.tsx";
 
 function App() {
-    const [themeColor, setThemeColor] = useState<string>('light')
+    const [themeColor, setThemeColor] = useState<string>('white')
     
     return (
         <>
             <ThemeContext.Provider value={{
-                theme: 'light',
-                changeTheme: (theme) => console.log(theme)
+                theme: themeColor,
+                changeTheme: (themeValue: string) => setThemeColor(themeValue)
             }}>
-                <A/>
-                <B/>
+                <MenuComponent/>
+                <HomeComponent/>
             </ThemeContext.Provider>
         </>
     )
