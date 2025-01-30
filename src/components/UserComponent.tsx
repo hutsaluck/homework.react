@@ -1,0 +1,32 @@
+import {IUser} from "../models/IUser.ts";
+
+type IUserProps = {
+    user: IUser;
+}
+export const UserComponent = ({user}: IUserProps) => {
+    const {id, name, username, website, email, phone} = user
+    const image = `https://picsum.photos/200/300??random=${id}`
+    return (
+        <div
+            className="my-10 border border-gray-300 rounded-2xl grid justify-center items-center cursor-pointer transition-shadow duration-500 hover:shadow-lg">
+            <div className="overflow-hidden rounded-t-2xl h-64 w-full">
+                <img
+                    src={image}
+                    alt={username}
+                    className="w-full h-full object-cover rounded-t-2xl transition-transform duration-500 hover:scale-110"
+                />
+            </div>
+            <div className="p-4">
+                <h3 className="text-2xl font-semibold text-center mb-2">
+                    {name}
+                </h3>
+                <div
+                    className="text-center max-h-[160px] hover:max-h-full overflow-hidden text-ellipsis transition-all duration-300">
+                    <p>website: {website}</p>
+                    <p>email: {email}</p>
+                    <p>phone: {phone}</p>
+                </div>
+            </div>
+        </div>
+    );
+};

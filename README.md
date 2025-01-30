@@ -1,50 +1,43 @@
-# React + TypeScript + Vite
+# Проект: Управління постами та коментарями
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Опис
 
-Currently, two official plugins are available:
+Цей проект реалізує управління станом постів і коментарів, використовуючи JSONPlaceholder API. Він також включає маршрутизацію для відображення користувачів, їхніх постів і коментарів, а також спеціальний маршрут `/complex`, який об'єднує ці дані.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Функціонал
+- **Стейт-менеджмент**: Збереження даних про пости та коментарі у глобальному стані.
+- **Маршрутизація**:
+    - `/users` – список користувачів.
+    - `/posts` – список постів.
+    - `/comments` – список коментарів.
+    - `/complex` – сторінка, що містить інформацію про користувача, його пости та коментарі.
+- **Оптимізація запитів**: Дані завантажуються в стейт один раз і використовуються звідти, щоб уникнути зайвих запитів до API.
+- **Перевірка наповнення стейту**: Доступ до `/complex` можливий лише після попереднього відвідування відповідних сторінок або за умови автоматичного заповнення стейту.
 
-## Expanding the ESLint configuration
+## Встановлення та запуск
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Клонуйте репозиторій:
+   ```sh
+   git clone https://github.com/your-repository.git
+   ```
+2. Перейдіть у папку проекту:
+   ```sh
+   cd your-project-folder
+   ```
+3. Встановіть залежності:
+   ```sh
+   npm install
+   ```
+4. Запустіть проект:
+   ```sh
+   npm start
+   ```
 
-- Configure the top-level `parserOptions` property like this:
+## Технології
+- React
+- Redux (або Context API для стейт-менеджменту)
+- React Router
+- JSONPlaceholder API
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Ліцензія
+Цей проект розповсюджується за ліцензією MIT.
